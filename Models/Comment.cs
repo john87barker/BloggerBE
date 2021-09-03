@@ -10,6 +10,6 @@ namespace BloggerBE.Models
         [MaxLength(240)]
         public string Body { get; set; }
         [Required]
-        public int Blog { get; set; }
+        public int BlogId { get; set; }
     }
 }

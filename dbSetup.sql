@@ -20,3 +20,15 @@ CREATE TABLE IF NOT EXISTS blogs(
 
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
+
+CREATE TABLE IF NOT EXISTS comments(
+  id INT NOT NULL primary key COMMENT 'blog id',
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  body varchar(255) COMMENT 'Blog Body',
+  blogId INT NOT NULL COMMENT 'Blog ID',
+  creatorId VARCHAR(255) NOT NULL COMMENT 'Account Id of Creator',
+
+  FOREIGN KEY (blogId) REFERENCES blogs(id) ON DELETE CASCADE,
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
+) default charset utf8 COMMENT '';
