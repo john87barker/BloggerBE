@@ -34,6 +34,8 @@ namespace BloggerBE.Repositories
 
     }
 
+    
+
     internal Blog Get(int id)
     {
       string sql = @"
@@ -50,6 +52,42 @@ namespace BloggerBE.Repositories
         blog.Creator = profile;
         return blog;
       }, new { id }, splitOn: "id").FirstOrDefault();
+    }
+
+
+
+    internal Blog Create(Blog newBlog)
+    {
+      string sql = @"
+        INSERT INTO blogs
+        (title, body, imgUrl, published, creatorId, id)
+        VALUE
+        (@Title, @Body, @ImgUrl, @Published, @CreatorId, @Id);
+        SELECT LAST_INSERT_ID();
+        ";
+      int id = _db.ExecuteScalar<int>(sql, newBlog);
+      return Get(id);
+    }
+
+    internal Blog Update(Blog updatedBlog)
+    {
+      string sql = @"
+        UPDATE blogs
+        SET
+            title = @Title,
+            body = @Body,
+            imgUrl = @ImgUrl
+        WHERE id = @Id;
+      ";
+      _db.Execute(sql, updatedBlog);
+      return updatedBlog;
+
+    }
+
+    internal void Delete(int id)
+    {
+      string sql = "DELETE FROM blogs WHERE id = @id LIMIT 1";
+      _db.Execute(sql, new { id });
     }
   }
 }
