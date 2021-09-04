@@ -14,9 +14,14 @@ namespace BloggerBE.Services
       _repo = repo;
     }
 
-    internal List<Profile> Get()
+    internal Profile Get(int id)
     {
-      return _repo.Get();
+      Profile profile = _repo.Get(id);
+      if(profile == null)
+      {
+        throw new Exception("invalid profile id");
+      }
+      return profile;
     }
   }
 }

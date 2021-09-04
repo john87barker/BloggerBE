@@ -17,13 +17,13 @@ namespace BloggerBE.Controllers
       _profilesService = profilesService;
     }
 
-    [HttpGet]
-    public ActionResult<List<Profile>> Get()
+    [HttpGet("{id}")]
+    public ActionResult<List<Profile>> Get(int id)
     {
         try
         {
-        List<Profile> profiles = _profilesService.Get();
-        return Ok(profiles);
+        Profile profile = _profilesService.Get(id);
+        return Ok(profile);
       }
         catch (Exception err)
         {

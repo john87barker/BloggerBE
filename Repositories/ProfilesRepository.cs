@@ -15,9 +15,11 @@ namespace BloggerBE.Repositories
       _db = db;
     }
 
-    internal List<Profile> Get()
+    internal Profile Get(int id)
     {
-     
+     string sql = "SELECT * FROM accounts WHERE id = @id";
+     return _db.QueryFirstOrDefault<Profile>(sql, new { id });
     }
+
   }
 }
