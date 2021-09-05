@@ -38,7 +38,6 @@ namespace BloggerBE.Services
     internal Blog Edit(Blog updatedBlog)
     {
        Blog original = Get(updatedBlog.Id);
-      // check each value on the incoming object, if it exits then allow it to continue, if it does not set it to the original value
       updatedBlog.Title = updatedBlog.Title != null ? updatedBlog.Title : original.Title;
      updatedBlog.Body = updatedBlog.Body != null ? updatedBlog.Body : original.Body;
       updatedBlog.ImgUrl = updatedBlog.ImgUrl != null ? updatedBlog.ImgUrl : original.ImgUrl;

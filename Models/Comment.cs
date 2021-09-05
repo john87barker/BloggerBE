@@ -6,6 +6,7 @@ namespace BloggerBE.Models
     {
         public int Id { get; set; }
         public string CreatorId { get; set; }
+        public Profile Creator { get; set; }
         [Required]
         [MaxLength(240)]
         public string Body { get; set; }

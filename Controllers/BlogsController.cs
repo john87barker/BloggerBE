@@ -58,7 +58,7 @@ namespace BloggerBE.Controllers
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         newBlog.CreatorId = userInfo.Id;
         Blog makeBlog = _blogsService.Create(newBlog);
-        return Ok(newBlog);
+        return Ok(makeBlog );
       }
       catch (Exception err)
       {
