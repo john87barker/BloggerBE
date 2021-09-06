@@ -14,7 +14,7 @@ namespace BloggerBE.Services
       _repo = repo;
     }
 
-    internal Profile Get(int id)
+    internal Profile Get(string id)
     {
       Profile profile = _repo.Get(id);
       if(profile == null)

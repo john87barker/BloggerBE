@@ -46,7 +46,24 @@ namespace BloggerBE.Controllers
         return BadRequest(err.Message);
       }
     }
-// TODO add GET: '/api/blogs/:id/comments' Returns comments for a blog
+    // TODO add GET: '/api/blogs/:id/comments' Returns comments for a blog
+
+
+    // [HttpGet("{id/comments}")]
+    // public ActionResult<Comment> GetComments()
+    // {
+    //   try
+    //   {
+    //     Comment bComments = _blogsService.GetComments();
+    //     return Ok(bComments);
+    //   }
+    //   catch (Exception err)
+    //   {
+    //     return BadRequest(err.Message);
+    //   }
+    // }
+
+
 
     [HttpPost]
     [Authorize]

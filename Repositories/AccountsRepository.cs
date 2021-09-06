@@ -1,4 +1,6 @@
+using System;
 using System.Data;
+using System.Linq;
 using BloggerBE.Models;
 using Dapper;
 
@@ -47,5 +49,22 @@ namespace BloggerBE.Repositories
             _db.Execute(sql, update);
             return update;
         }
+
+    internal Account GetBlogsByAccount()
+    {
+      string sql = @"
+      SELECT
+        b*,
+        a*
+      FROM accounts a
+      JOIN blogs b ON a.id = b.creatorId
+      WHERE a = @Creator
+      ";
+      return _db.Query<Blog, Account, Account>(sql, (b, ac) =>
+      {
+        ac.Id = b.CreatorId;
+        return ac;
+      }, splitOn: "id").FirstOrDefault();
     }
+  }
 }

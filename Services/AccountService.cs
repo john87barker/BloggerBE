@@ -1,3 +1,4 @@
+using System;
 using BloggerBE.Models;
 using BloggerBE.Repositories;
 
@@ -36,5 +37,11 @@ namespace BloggerBE.Services
             original.Picture = editData.Picture.Length > 0 ? editData.Picture : original.Picture;
             return _repo.Edit(original);
         }
+
+    internal Account GetBlogsByAccount()
+    {
+      Account aBlogs = _repo.GetBlogsByAccount();
+      return aBlogs;
     }
+  }
 }

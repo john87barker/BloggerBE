@@ -15,7 +15,7 @@ namespace BloggerBE.Repositories
       _db = db;
     }
 
-    internal Profile Get(int id)
+    internal Profile Get(string id)
     {
      string sql = "SELECT * FROM accounts WHERE id = @id";
      return _db.QueryFirstOrDefault<Profile>(sql, new { id });

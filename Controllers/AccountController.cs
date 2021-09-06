@@ -20,6 +20,7 @@ namespace BloggerBE.Controllers
             _accountService = accountService;
         }
 
+     
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<Account>> Get()
@@ -34,7 +35,25 @@ namespace BloggerBE.Controllers
                 return BadRequest(e.Message);
             }
         }
+    
+    // [HttpGet("{blogs}")]
+    // public ActionResult<Account> GetBlogsByAccount()
+    // {
+    //     try
+    //     {
+    //     Account aBlogs = _accountService.GetBlogsByAccount();
+    //     Account aBlogs = _blogsService.GetBlogsByAccount();
+    //     return Ok(aBlogs);
+    //   }
+    //     catch (Exception err)
+    //     {
+    //     return BadRequest(err.Message);
+    //   }
+    // }
+    
     }
+
+    
 
 
 }

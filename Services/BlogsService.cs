@@ -29,6 +29,16 @@ namespace BloggerBE.Services
       return blog;
     }
 
+    internal Blog GetBlogsByProfile(string id)
+    {
+      return _repo.GetBlogsByProfile(id);
+    }
+
+    internal Comment GetComments()
+    {
+      throw new NotImplementedException();
+    }
+
     internal Blog Create(Blog newBlog)
     {
       Blog makeBlog = _repo.Create(newBlog);
@@ -43,6 +53,8 @@ namespace BloggerBE.Services
       updatedBlog.ImgUrl = updatedBlog.ImgUrl != null ? updatedBlog.ImgUrl : original.ImgUrl;
       return _repo.Update(updatedBlog);
     }
+
+    
 
     internal void Delete(int blogId, string userId)
     {
