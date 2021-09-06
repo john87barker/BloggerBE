@@ -35,8 +35,6 @@ namespace BloggerBE.Controllers
       }
     }
 
-
-
      [HttpGet("{id}/blogs")]
     public ActionResult<Blog> GetBlogsByProfile(string id)
     {

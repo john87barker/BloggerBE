@@ -65,13 +65,11 @@ namespace BloggerBE.Controllers
       }
     }
 
-
-
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Blog>> Create([FromBody] Blog newBlog)
     {
-      // TODO this isn't working right...come back to it...
+     
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
@@ -87,12 +85,15 @@ namespace BloggerBE.Controllers
 
     [HttpPut("{id}")]
     [Authorize]
-    public ActionResult<Blog> Edit([FromBody] Blog updatedBlog, int id)
+
+    // TODO Make it so only creator can edit
+    public async Task<ActionResult<Blog>> Edit([FromBody] Blog updatedBlog, int id)
     {
       try
       {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         updatedBlog.Id = id;
-        Blog blog = _blogsService.Edit(updatedBlog);
+        Blog blog = _blogsService.Edit(updatedBlog, userInfo.Id);
         return Ok(blog);
       }
       catch (Exception err)
@@ -100,7 +101,6 @@ namespace BloggerBE.Controllers
         return BadRequest(err.Message);
       }
     }
-
 
     [HttpDelete("{id}")]
     [Authorize]

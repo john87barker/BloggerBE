@@ -45,8 +45,12 @@ namespace BloggerBE.Services
       return makeBlog;
     }
 
-    internal Blog Edit(Blog updatedBlog)
+    internal Blog Edit(Blog updatedBlog, string userId)
     {
+      if(updatedBlog.CreatorId != userId)
+      {
+        throw new Exception("Not your blog to edit.");
+      }
        Blog original = Get(updatedBlog.Id);
       updatedBlog.Title = updatedBlog.Title != null ? updatedBlog.Title : original.Title;
      updatedBlog.Body = updatedBlog.Body != null ? updatedBlog.Body : original.Body;

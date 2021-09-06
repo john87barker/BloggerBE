@@ -69,12 +69,13 @@ namespace BloggerBE.Controllers
     }
 
     [HttpPut("{id}")]
-    public ActionResult<Comment> Edit([FromBody] Comment updatedComment, int id)
+    public async Task<ActionResult<Comment>> Edit([FromBody] Comment updatedComment, int id)
     {
       try
       {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         updatedComment.Id = id;
-        Comment comment = _commentsService.Edit(updatedComment);
+        Comment comment = _commentsService.Edit(updatedComment, userInfo.Id);
         return Ok(comment);
       }
       catch (Exception err)

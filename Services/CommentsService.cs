@@ -36,9 +36,13 @@ namespace BloggerBE.Services
       
     }
 
-    internal Comment Edit(Comment updatedComment)
+    internal Comment Edit(Comment updatedComment, string userId)
     {
       Comment original = Get(updatedComment.Id);
+      if(updatedComment.CreatorId != userId)
+      {
+        throw new Exception("Not your comment to edit.");
+      }
       updatedComment.Body = updatedComment.Body != null ? updatedComment.Body : original.Body;
       return _repo.Update(updatedComment);
     }
