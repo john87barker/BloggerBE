@@ -50,6 +50,22 @@ namespace BloggerBE.Repositories
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
 
+    internal Blog GetBlogsByAccount(string id)
+    {
+ string sql = @"
+      SELECT 
+        a.*,
+        b.*
+      FROM blogs b
+      JOIN accounts a ON b.creatorId = a.id
+      WHERE b.creatorId = @id
+      ";
+      return _db.Query<Account, Blog, Blog>(sql, (ac, blog) =>
+      {
+        blog.Creator = ac;
+        return blog;
+      }, new { id }, splitOn: "id").FirstOrDefault();    }
+
     internal Blog Get(int id)
     {
       string sql = @"

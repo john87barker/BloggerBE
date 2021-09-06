@@ -33,10 +33,9 @@ namespace BloggerBE.Services
     {
       return _repo.GetBlogsByProfile(id);
     }
-
-    internal Comment GetComments()
+    internal Blog GetBlogsByAccount(string id)
     {
-      throw new NotImplementedException();
+      return _repo.GetBlogsByAccount(id);
     }
 
     internal Blog Create(Blog newBlog)
@@ -70,6 +69,6 @@ namespace BloggerBE.Services
       _repo.Delete(blogId);
     }
 
-    
+   
   }
 }
