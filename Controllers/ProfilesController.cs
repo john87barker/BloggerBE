@@ -12,11 +12,13 @@ namespace BloggerBE.Controllers
     {
     private readonly ProfilesService _profilesService;
     private readonly BlogsService _blogsService;
+    private readonly CommentsService _commentsService;
 
-    public ProfilesController(ProfilesService profilesService, BlogsService blogsService)
+    public ProfilesController(ProfilesService profilesService, BlogsService blogsService, CommentsService commentsService)
     {
       _profilesService = profilesService;
       _blogsService = blogsService;
+      _commentsService = commentsService;
     }
 
     [HttpGet("{id}")]
@@ -35,13 +37,27 @@ namespace BloggerBE.Controllers
 
 
 
-     [HttpGet("{id}/{blogs}")]
+     [HttpGet("{id}/blogs")]
     public ActionResult<Blog> GetBlogsByProfile(string id)
     {
         try
         {
         Blog blogs = _blogsService.GetBlogsByProfile(id);
         return Ok(blogs);
+      }
+        catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
+    }
+
+    [HttpGet("{id}/comments")]
+    public ActionResult<Comment> GetCommentsByProfile(string id)
+    {
+        try
+        {
+        Comment comments = _commentsService.GetCommentsByProfile(id);
+        return Ok(comments);
       }
         catch (Exception err)
         {

@@ -34,6 +34,8 @@ namespace BloggerBE.Repositories
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
 
+
+
     internal Comment Update(Comment updatedComment)
     {
       string sql = @"
@@ -51,6 +53,39 @@ namespace BloggerBE.Repositories
       string sql = "DELETE FROM comments WHERE id = @id LIMIT 1";
       _db.Execute(sql, new { commentId });
     }
+
+    internal Comment GetCommentsByProfile(string id)
+    {
+      string sql = @"
+      SELECT 
+        a.*,
+        c.*
+      FROM comments c
+      JOIN accounts a ON c.creatorId = a.id
+      WHERE c.creatorId = @id
+      ";
+      return _db.Query<Profile, Comment, Comment>(sql, (profile, comments) =>
+      {
+        comments.Creator = profile;
+        return comments;
+      }, new { id }, splitOn: "id").FirstOrDefault();
+    }
+
+    internal Comment GetCommentsByBlog(int id)
+    {
+    string sql = @"
+      SELECT 
+        b.*,
+        c.*
+      FROM comments c
+      JOIN blogs b ON c.blogId = b.id
+      WHERE c.blogId = @id
+      ";
+      return _db.Query<Blog, Comment, Comment>(sql, (blog, comments) =>
+      {
+        comments.BlogId = blog.Id;
+        return comments;
+      }, new { id }, splitOn: "id").FirstOrDefault();    }
 
 
 

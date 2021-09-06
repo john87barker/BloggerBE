@@ -14,9 +14,11 @@ namespace BloggerBE.Controllers
     public class BlogsController : ControllerBase
     {
     private readonly BlogsService _blogsService;
-    public BlogsController(BlogsService blogsService)
+    private readonly CommentsService _commentsService;
+    public BlogsController(BlogsService blogsService, CommentsService commentsService)
     {
       _blogsService = blogsService;
+      _commentsService = commentsService;
     }
 
     [HttpGet]
@@ -49,19 +51,19 @@ namespace BloggerBE.Controllers
     // TODO add GET: '/api/blogs/:id/comments' Returns comments for a blog
 
 
-    // [HttpGet("{id/comments}")]
-    // public ActionResult<Comment> GetComments()
-    // {
-    //   try
-    //   {
-    //     Comment bComments = _blogsService.GetComments();
-    //     return Ok(bComments);
-    //   }
-    //   catch (Exception err)
-    //   {
-    //     return BadRequest(err.Message);
-    //   }
-    // }
+    [HttpGet("{id}/comments")]
+    public ActionResult<Comment> GetCommentsByBlog(int id)
+    {
+      try
+      {
+        Comment bComments = _commentsService.GetCommentsByBlog(id);
+        return Ok(bComments);
+      }
+      catch (Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
 
 
 

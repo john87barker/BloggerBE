@@ -49,8 +49,18 @@ namespace BloggerBE.Services
       if(deadComment.CreatorId != userId)
       {
         throw new Exception("Not your comment to delete.");
-        _repo.Delete(commentId);
       }
+        _repo.Delete(commentId);
+    }
+
+      internal Comment GetCommentsByProfile(string id)
+    {
+      return _repo.GetCommentsByProfile(id);
+    }
+
+    internal Comment GetCommentsByBlog(int id)
+    {
+      return _repo.GetCommentsByBlog(id);
     }
   }
 }

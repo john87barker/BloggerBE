@@ -43,7 +43,6 @@ namespace BloggerBE.Repositories
       JOIN accounts a ON b.creatorId = a.id
       WHERE b.creatorId = @id
       ";
-      // data type 1, data type 2, return type
       return _db.Query<Profile, Blog, Blog>(sql, (profile, blog) =>
       {
         blog.Creator = profile;
