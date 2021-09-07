@@ -71,7 +71,24 @@ namespace BloggerBE.Repositories
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
 
-    internal Comment GetCommentsByBlog(int id)
+    internal List<Comment> GetCommentsByAccount(string id)
+    {
+      string sql = @"
+      SELECT 
+        a.*,
+        c.*
+      FROM comments c
+      JOIN accounts a ON c.creatorId = a.id
+      WHERE c.creatorId = @id
+      ";
+      return _db.Query<Account, Comment, Comment>(sql, (ac, comments) =>
+      {
+        comments.Creator = ac;
+        return comments;
+      }, new { id }, splitOn: "id").ToList(); 
+    }
+
+    internal List<Comment> GetCommentsByBlog(int id)
     {
     string sql = @"
       SELECT 
@@ -85,7 +102,7 @@ namespace BloggerBE.Repositories
       {
         comments.BlogId = blog.Id;
         return comments;
-      }, new { id }, splitOn: "id").FirstOrDefault();    }
+      }, new { id }, splitOn: "id").ToList();    }
 
 
 

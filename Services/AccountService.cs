@@ -32,6 +32,7 @@ namespace BloggerBE.Services
 
         internal Account Edit(Account editData, string userEmail)
         {
+            
             Account original = GetProfileByEmail(userEmail);
             original.Name = editData.Name.Length > 0 ? editData.Name : original.Name;
             original.Picture = editData.Picture.Length > 0 ? editData.Picture : original.Picture;
@@ -42,6 +43,30 @@ namespace BloggerBE.Services
     {
       Account aBlogs = _repo.GetBlogsByAccount();
       return aBlogs;
+    }
+
+    internal Account EditAccount(Account updatedA, string userId)
+    {
+        if(updatedA.Id != userId)
+        {
+        throw new Exception("NOT ALLOWED");
+      }
+      Account original = GetById(updatedA.Id);
+      updatedA.Name = updatedA.Name != null ? updatedA.Name : original.Name;
+      updatedA.Picture = updatedA.Picture != null ? updatedA.Picture : original.Picture;    
+      updatedA.Email = updatedA.Email != null ? updatedA.Email : original.Email;
+      return _repo.Update(updatedA);
+
+    }
+
+    private Account GetById(string id)
+    {
+      Account account = _repo.GetById(id);
+      if(account == null)
+      {
+        throw new Exception("Invalid account ID");
+      }
+      return account;
     }
   }
 }

@@ -33,7 +33,7 @@ namespace BloggerBE.Repositories
 
     }
 
-    internal Blog GetBlogsByProfile(string id)
+    internal List<Blog> GetBlogsByProfile(string id)
     {
       string sql = @"
       SELECT 
@@ -47,10 +47,10 @@ namespace BloggerBE.Repositories
       {
         blog.Creator = profile;
         return blog;
-      }, new { id }, splitOn: "id").FirstOrDefault();
+      }, new { id }, splitOn: "id").ToList();
     }
 
-    internal Blog GetBlogsByAccount(string id)
+    internal List<Blog> GetBlogsByAccount(string id)
     {
  string sql = @"
       SELECT 
@@ -64,7 +64,7 @@ namespace BloggerBE.Repositories
       {
         blog.Creator = ac;
         return blog;
-      }, new { id }, splitOn: "id").FirstOrDefault();    }
+      }, new { id }, splitOn: "id").ToList();    }
 
     internal Blog Get(int id)
     {

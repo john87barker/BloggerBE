@@ -36,11 +36,11 @@ namespace BloggerBE.Controllers
     }
 
      [HttpGet("{id}/blogs")]
-    public ActionResult<Blog> GetBlogsByProfile(string id)
+    public ActionResult<List<Blog>> GetBlogsByProfile(string id)
     {
         try
         {
-        Blog blogs = _blogsService.GetBlogsByProfile(id);
+        List<Blog> blogs = _blogsService.GetBlogsByProfile(id);
         return Ok(blogs);
       }
         catch (Exception err)

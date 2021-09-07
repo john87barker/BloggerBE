@@ -42,12 +42,13 @@ namespace BloggerBE.Controllers
     
         [HttpGet("blogs")]
         [Authorize]
-        public async Task<ActionResult<Blog>> GetBlogsByAccount(string id)
+        public async Task<ActionResult<List<Blog>>> GetBlogsByAccount()
         {
             try
         {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        Blog blogs = _blogsService.GetBlogsByAccount(id);
+        
+        List<Blog> blogs = _blogsService.GetBlogsByAccount(userInfo.Id);
         return Ok(blogs);
       }
         catch (Exception err)
@@ -56,6 +57,41 @@ namespace BloggerBE.Controllers
       }
         }
     
-    
+    [HttpGet("comments")]
+        [Authorize]
+        public async Task<ActionResult<List<Comment>>> GetCommentsByAccount()
+        {
+            try
+        {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        
+        List<Comment> comments = _commentsService.GetCommentsByAccount(userInfo.Id);
+        return Ok(comments);
+      }
+        catch (Exception err)
+        {
+        return BadRequest(err.Message);
+      }
+        }
+
+
+    [HttpPut("{id}")]
+    [Authorize]
+
+    // TODO Make it so only creator can edit
+    public async Task<ActionResult<Account>> EditAccount([FromBody] Account updatedA, string id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        updatedA.Id = id;
+        Account ac = _accountService.Edit(updatedA, userInfo.Id);
+        return Ok(ac);
+      }
+      catch (Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
     }
 }

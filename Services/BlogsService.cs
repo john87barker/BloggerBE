@@ -29,11 +29,11 @@ namespace BloggerBE.Services
       return blog;
     }
 
-    internal Blog GetBlogsByProfile(string id)
+    internal List<Blog> GetBlogsByProfile(string id)
     {
       return _repo.GetBlogsByProfile(id);
     }
-    internal Blog GetBlogsByAccount(string id)
+    internal List<Blog> GetBlogsByAccount(string id)
     {
       return _repo.GetBlogsByAccount(id);
     }

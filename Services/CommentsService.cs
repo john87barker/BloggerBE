@@ -14,10 +14,6 @@ namespace BloggerBE.Services
       _repo = repo;
     }
 
-    // internal List<Comment> Get()
-    // {
-    //   return _repo.Get();
-    // }
 
      internal Comment Get(int id)
     {
@@ -62,9 +58,14 @@ namespace BloggerBE.Services
       return _repo.GetCommentsByProfile(id);
     }
 
-    internal Comment GetCommentsByBlog(int id)
+    internal List<Comment> GetCommentsByBlog(int id)
     {
       return _repo.GetCommentsByBlog(id);
+    }
+
+    internal List<Comment> GetCommentsByAccount(string id)
+    {
+      return _repo.GetCommentsByAccount(id);
     }
   }
 }

@@ -66,5 +66,19 @@ namespace BloggerBE.Repositories
         return ac;
       }, splitOn: "id").FirstOrDefault();
     }
+
+    internal Account Update(Account updatedA)
+    {
+      string sql = @"
+      UPDATE accounts
+      SET
+        name = @Name,
+        picture = @Pictue,
+        email = @Email
+      WHERE id = @Id;
+      ";
+      _db.Execute(sql, updatedA);
+      return updatedA;
+    }
   }
 }

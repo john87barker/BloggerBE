@@ -52,11 +52,11 @@ namespace BloggerBE.Controllers
 
 
     [HttpGet("{id}/comments")]
-    public ActionResult<Comment> GetCommentsByBlog(int id)
+    public ActionResult<List<Comment>> GetCommentsByBlog(int id)
     {
       try
       {
-        Comment bComments = _commentsService.GetCommentsByBlog(id);
+        List<Comment> bComments = _commentsService.GetCommentsByBlog(id);
         return Ok(bComments);
       }
       catch (Exception err)
