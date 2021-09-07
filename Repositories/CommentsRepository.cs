@@ -48,10 +48,10 @@ namespace BloggerBE.Repositories
       return updatedComment;
     }
 
-    internal void Delete(int commentId)
+    internal void Delete(int id)
     {
       string sql = "DELETE FROM comments WHERE id = @id LIMIT 1";
-      _db.Execute(sql, new { commentId });
+      _db.Execute(sql, new { id });
     }
 
     internal Comment GetCommentsByProfile(string id)
@@ -106,22 +106,22 @@ namespace BloggerBE.Repositories
 
 
 
-    // internal List<Comment> Get()
-    // {
-    //   string sql = @"
-    //   SELECT 
-    //     a.*,
-    //     c.*
-    //   FROM comments c
-    //   JOIN accounts a ON c.creatorId = a.id
-    //   ";
-    //   // data type 1, data type 2, return type
-    //   return _db.Query<Profile, Comment, Comment>(sql, (profile, comments) =>
-    //   {
-    //     comments.CreatorId = profile.Id;
-    //     return comments;
-    //   }, splitOn: "id").ToList();
-    // }
+    internal List<Comment> Get()
+    {
+      string sql = @"
+      SELECT 
+        a.*,
+        c.*
+      FROM comments c
+      JOIN accounts a ON c.creatorId = a.id
+      ";
+      // data type 1, data type 2, return type
+      return _db.Query<Profile, Comment, Comment>(sql, (profile, comments) =>
+      {
+        comments.CreatorId = profile.Id;
+        return comments;
+      }, splitOn: "id").ToList();
+    }
     internal Comment Create(Comment newComment)
     {
       string sql = @"

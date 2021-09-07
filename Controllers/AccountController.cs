@@ -75,16 +75,16 @@ namespace BloggerBE.Controllers
         }
 
 
-    [HttpPut("{id}")]
+    [HttpPut]
     [Authorize]
 
     // TODO Make it so only creator can edit
-    public async Task<ActionResult<Account>> EditAccount([FromBody] Account updatedA, string id)
+    public async Task<ActionResult<Account>> EditAccount([FromBody] Account updatedA)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        updatedA.Id = id;
+        // updatedA.Id = id;
         Account ac = _accountService.EditAccount(updatedA, userInfo.Id);
         return Ok(ac);
       }

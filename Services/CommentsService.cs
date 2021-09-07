@@ -14,6 +14,10 @@ namespace BloggerBE.Services
       _repo = repo;
     }
 
+    internal List<Comment> GetAll()
+    {
+      return _repo.Get();
+    }
 
      internal Comment Get(int id)
     {

@@ -26,7 +26,7 @@ namespace BloggerBE.Controllers
 //     {
 //       try
 //       {
-//         List<Comment> comments = _commentsService.Get();
+//         List<Comment> comments = _commentsService.GetAll();
 //         return Ok(comments);
 //       }
 //       catch (Exception err)

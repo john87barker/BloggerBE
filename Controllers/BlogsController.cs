@@ -48,8 +48,6 @@ namespace BloggerBE.Controllers
         return BadRequest(err.Message);
       }
     }
-    // TODO add GET: '/api/blogs/:id/comments' Returns comments for a blog
-
 
     [HttpGet("{id}/comments")]
     public ActionResult<List<Comment>> GetCommentsByBlog(int id)
