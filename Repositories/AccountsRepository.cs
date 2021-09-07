@@ -73,7 +73,7 @@ namespace BloggerBE.Repositories
       UPDATE accounts
       SET
         name = @Name,
-        picture = @Pictue,
+        picture = @Picture,
         email = @Email
       WHERE id = @Id;
       ";

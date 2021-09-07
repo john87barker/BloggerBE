@@ -85,7 +85,7 @@ namespace BloggerBE.Controllers
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         updatedA.Id = id;
-        Account ac = _accountService.Edit(updatedA, userInfo.Id);
+        Account ac = _accountService.EditAccount(updatedA, userInfo.Id);
         return Ok(ac);
       }
       catch (Exception err)
